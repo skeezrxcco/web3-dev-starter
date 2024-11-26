@@ -5,7 +5,7 @@ import { wagmiAdapter, projectId } from '@/config'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createAppKit } from '@reown/appkit/react' 
 import { mainnet, arbitrum, avalanche, base, optimism, polygon, hardhat } from '@reown/appkit/networks'
-import React, { type ReactNode } from 'react'
+import React, { type ReactNode, useState, useEffect } from 'react'
 import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi'
 import Head from 'next/head'
 
@@ -36,12 +36,19 @@ createAppKit({
 })
 
 function ContextProvider({ children, cookies }: { children: ReactNode; cookies: string | null }) {
+  const [mounted, setMounted] = React.useState(false)
   const initialState = cookieToInitialState(wagmiAdapter.wagmiConfig as Config, cookies)
 
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
-    <Providers>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </Providers>
+    <WagmiProvider config={wagmiAdapter.wagmiConfig as Config} initialState={initialState}>
+      <QueryClientProvider client={queryClient}>
+        {mounted && children}
+      </QueryClientProvider>
+    </WagmiProvider>
   )
 }
 
@@ -51,9 +58,7 @@ export function Providers({ children }: { children: ReactNode }) {
       <Head>
         <meta name="darkreader-lock" />
       </Head>
-      <WagmiProvider config={wagmiAdapter.wagmiConfig as Config}>
-        {children}
-      </WagmiProvider>
+      {children}
     </>
   )
 }

@@ -3,7 +3,7 @@ import { localhost, sepolia } from '@reown/appkit/networks'
 
 interface ContractConfig {
   address: `0x${string}`
-  abi: any[]
+  abi: Record<string, unknown>[]
 }
 
 interface NetworkConfig {

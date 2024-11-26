@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useReadContract, useWriteContract } from 'wagmi'
 import { HELLO_WORLD_ADDRESS } from '@config/contracts'
 import HelloWorldABI from '@contracts/HelloWorld.sol/HelloWorld.json'

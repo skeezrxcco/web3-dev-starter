@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image";
 import Header from '@components/Header';
 import { Web3Auth } from '@components/Web3Auth';
 import { HelloWorld } from '@components/HelloWorld';

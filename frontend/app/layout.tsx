@@ -9,6 +9,21 @@ export const metadata: Metadata = {
   description: "Powered by WalletConnect"
 };
 
+// Suppress hydration warnings from Dark Reader extension
+const suppressDarkReaderWarnings = `
+  (function() {
+    const originalError = console.error;
+    console.error = (...args) => {
+      if (args[0]?.includes('Warning: Extra attributes from the server')) {
+        if (args[0]?.includes('data-darkreader')) {
+          return;
+        }
+      }
+      originalError.apply(console, args);
+    };
+  })();
+`;
+
 export default async function RootLayout({
   children
 }: Readonly<{
@@ -19,6 +34,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: suppressDarkReaderWarnings }} />
+      </head>
       <body>
         <Providers>
           <ContextProvider cookies={cookies}>{children}</ContextProvider>

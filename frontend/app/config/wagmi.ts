@@ -15,7 +15,7 @@ export const config = createConfig({
       metadata: {
         name: 'Propulsion',
         description: 'Your Propulsion App',
-        url: 'http://localhost:3000',
+        url: 'http://localhost:3001',
         icons: ['https://avatars.githubusercontent.com/u/37784886']
       }
     })

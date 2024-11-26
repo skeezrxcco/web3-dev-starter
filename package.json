@@ -7,9 +7,21 @@
     "frontend:build": "cd frontend && npm run build",
     "frontend:start": "cd frontend && npm run start",
     "frontend:install": "cd frontend && npm install",
-    "install:all": "npm install && npm run frontend:install"
+    "blockchain:install": "cd blockchain && npm install",
+    "blockchain:compile": "cd blockchain && npx hardhat compile",
+    "blockchain:node": "cd blockchain && npx hardhat node",
+    "blockchain:deploy": "cd blockchain && npx hardhat run scripts/deploy.ts --network localhost",
+    "blockchain:deploy:sepolia": "cd blockchain && npx hardhat run scripts/deploy.ts --network sepolia",
+    "blockchain:test": "cd blockchain && npx hardhat test",
+    "blockchain:coverage": "cd blockchain && npx hardhat coverage",
+    "blockchain:verify": "cd blockchain && npx hardhat verify",
+    "install:all": "npm install && npm run frontend:install && npm run blockchain:install",
+    "dev": "concurrently \"npm run blockchain:node\" \"npm run frontend:dev\""
   },
   "keywords": ["web3", "blockchain", "next.js"],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
 }

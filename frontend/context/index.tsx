@@ -1,13 +1,13 @@
-
 // context/index.tsx
 'use client'
 
 import { wagmiAdapter, projectId } from '@/config'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createAppKit } from '@reown/appkit/react' 
-import { mainnet, arbitrum, avalanche, base, optimism, polygon } from '@reown/appkit/networks'
+import { mainnet, arbitrum, avalanche, base, optimism, polygon, hardhat } from '@reown/appkit/networks'
 import React, { type ReactNode } from 'react'
 import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi'
+import Head from 'next/head'
 
 // Set up queryClient
 const queryClient = new QueryClient()
@@ -16,19 +16,18 @@ if (!projectId) {
   throw new Error('Project ID is not defined')
 }
 
-// Set up metadata
 const metadata = {
-  name: 'Propulsion_dev',
-  description: 'AppKit Example',
-  url: 'https://reown.com/appkit', // origin must match your domain & subdomain
-  icons: ['https://assets.reown.com/reown-profile-pic.png']
+  name: 'Propulsion',
+  description: 'Propulsion App',
+  url: 'localhost:3001',
+  icons: ['']
 }
 
 // Create the modal
 createAppKit({
   adapters: [wagmiAdapter],
   projectId,
-  networks: [mainnet, arbitrum, avalanche, base, optimism, polygon],
+  networks: [mainnet, arbitrum, avalanche, base, optimism, polygon, hardhat],
   defaultNetwork: mainnet,
   metadata: metadata,
   features: {
@@ -40,11 +39,23 @@ function ContextProvider({ children, cookies }: { children: ReactNode; cookies: 
   const initialState = cookieToInitialState(wagmiAdapter.wagmiConfig as Config, cookies)
 
   return (
-    <WagmiProvider config={wagmiAdapter.wagmiConfig as Config} initialState={initialState}>
+    <Providers>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </WagmiProvider>
+    </Providers>
+  )
+}
+
+export function Providers({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <Head>
+        <meta name="darkreader-lock" />
+      </Head>
+      <WagmiProvider config={wagmiAdapter.wagmiConfig as Config}>
+        {children}
+      </WagmiProvider>
+    </>
   )
 }
 
 export default ContextProvider
-    

@@ -1,25 +1,14 @@
 'use client';
 
-import Link from 'next/link';
-import Web3Auth from './Web3Auth';
+import { Web3Auth } from '@components/Web3Auth';
 
 export default function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold text-gray-800">
-            Web3 Auth
-          </Link>
-          
-          <nav className="flex items-center">
-            <Link href="/" className="text-gray-600 hover:text-gray-900 mr-4">
-              Home
-            </Link>
-            <div className="relative">
-              <Web3Auth />
-            </div>
-          </nav>
+    <header className="fixed w-full bg-white shadow-md z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-4">
+          <div className="text-2xl font-bold text-gray-900">Web3 App</div>
+          <Web3Auth />
         </div>
       </div>
     </header>

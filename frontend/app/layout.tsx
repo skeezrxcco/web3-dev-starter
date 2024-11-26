@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
-import { headers } from "next/headers"; // added
+import { headers } from "next/headers";
+import { Providers } from './providers'
 import ContextProvider from '@/context'
 
 export const metadata: Metadata = {
@@ -15,14 +15,15 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const {get} = await headers();
-
   const cookies = get('cookie');
 
   return (
     <html lang="en">
       <body>
-        <ContextProvider cookies={cookies}>{children}</ContextProvider>
+        <Providers>
+          <ContextProvider cookies={cookies}>{children}</ContextProvider>
+        </Providers>
       </body>
     </html>
-  )
+  );
 }

@@ -1,0 +1,15 @@
+{
+  "name": "web3-project",
+  "version": "1.0.0",
+  "description": "Web3 project with Next.js frontend and blockchain integration",
+  "scripts": {
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:start": "cd frontend && npm run start",
+    "frontend:install": "cd frontend && npm install",
+    "install:all": "npm install && npm run frontend:install"
+  },
+  "keywords": ["web3", "blockchain", "next.js"],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "web3-project",
+  "version": "1.0.0",
+  "description": "Web3 project with Next.js frontend and blockchain integration",
+  "scripts": {
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:start": "cd frontend && npm run start",
+    "frontend:install": "cd frontend && npm install",
+    "frontend:lint": "cd frontend && npm run lint",
+    "frontend:lint:fix": "cd frontend && npm run lint:fix",
+    "blockchain:install": "cd blockchain && npm install",
+    "blockchain:compile": "cd blockchain && npx hardhat compile",
+    "blockchain:node": "cd blockchain && npx hardhat node",
+    "blockchain:deploy": "cd blockchain && npx hardhat run scripts/deploy.ts --network localhost",
+    "blockchain:deploy:sepolia": "cd blockchain && npx hardhat run scripts/deploy.ts --network sepolia",
+    "blockchain:test": "cd blockchain && npx hardhat test",
+    "blockchain:coverage": "cd blockchain && npx hardhat coverage",
+    "blockchain:verify": "cd blockchain && npx hardhat verify",
+    "blockchain:lint": "cd blockchain && npm run lint",
+    "blockchain:lint:fix": "cd blockchain && npm run lint:fix",
+    "install:all": "npm install && npm run frontend:install && npm run blockchain:install",
+    "dev": "concurrently \"npm run blockchain:node\" \"npm run frontend:dev\"",
+    "lint": "concurrently \"npm run frontend:lint\" \"npm run blockchain:lint\"",
+    "lint:fix": "concurrently \"npm run frontend:lint:fix\" \"npm run blockchain:lint:fix\""
+  },
+  "keywords": ["web3", "blockchain", "next.js"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}

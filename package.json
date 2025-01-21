@@ -24,10 +24,17 @@
     "lint": "concurrently \"npm run frontend:lint\" \"npm run blockchain:lint\"",
     "lint:fix": "concurrently \"npm run frontend:lint:fix\" \"npm run blockchain:lint:fix\""
   },
-  "keywords": ["web3", "blockchain", "next.js"],
+  "keywords": [
+    "web3",
+    "blockchain",
+    "next.js"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
   }
 }
